@@ -33,6 +33,9 @@ If those roles are not available, the lead can still delegate with the role inst
 
 The intended backend uses Python, FastAPI, FFmpeg, and OpenAI, but no application or tests exist yet.
 Inspect the current implementation before relying on these plans as facts.
+Use repository-root `shared/example.json` and `shared/README.md` as the draft scene reference; formal validation and API details still need agreement across all three leads.
+The mobile app stores returned scenes in React state and passes them to `Room3D` in `mobile/components/Room3D/`.
+Coordinate contract changes with the mobile and native 3D leads, assigning one writer in `shared/` and updating consumers together.
 Protect API keys and private room videos, validate uploads and external AI responses, and account for timeouts and failures at service boundaries.
 Do not read secrets, deploy, push, or perform destructive operations without the user's explicit authorization.
 Never edit generated files or `CHANGELOG.md` by hand.

@@ -2,237 +2,136 @@
 
 **Scan your space. Reimagine your room. Bring your ideas to life with AI.**
 
-🏆 **Built for AI IN YOUR PALM Hackathon 2026** · AI-Powered Mobile App
+Built for AI IN YOUR PALM Hackathon 2026.
 
----
+Me Room aims to turn a room-scanning video into an approximate 3D room and let users redesign it through chat.
+The selected architecture is a single Expo mobile application with native 3D rendering and a FastAPI backend for AI processing.
+This checkout currently contains the project structure, contributor guides, Codex team configurations, and a synthetic JSON example.
+The application, APIs, GLB assets, dependency manifests, and tests still need implementation.
 
-## 📖 What It Is
-
-**Me Room** is an AI-powered mobile application that transforms real-world living spaces into interactive 3D environments, making interior design more accessible, intuitive, and personalized.
-
-By scanning their room with a smartphone camera, users can generate an approximate 3D representation of their space, explore it virtually, and redesign it using natural language.
-
-Want to change your wall color, rearrange furniture, or explore a completely different interior style? Simply tell Me Room what you envision and let AI help bring your ideas to life.
-
-### ✨ Key Features
-
-- 📱 **AI Room Scanning** — Capture your room through a guided camera scan and let AI analyze its layout, furniture, and spatial relationships.
-- 🏡 **Interactive 3D Visualization** — Transform AI-generated room data into an explorable 3D environment.
-- 💬 **Conversational Interior Design** — Modify your room using natural language, from changing wall colors to rearranging furniture.
-- 🎨 **AI-Powered Redesign** — Explore different interior styles, including Minimalist, Scandinavian, Modern, and Japandi.
-- 🛋️ **Furniture Discovery (Planned)** — Discover furniture and decor recommendations with links to online marketplaces.
-
----
-
-## 🎥 Demo
-
-*Demo video coming soon.*
-
-<!-- Add your YouTube demo link here after uploading. -->
-
-<!-- Optional: Add the live demo or application link here. -->
-
----
-
-## 💡 Why We Built It
-
-Redesigning a room can be exciting, but visualizing the final result is often difficult.
-
-Traditional interior design tools frequently require technical knowledge, manual room measurements, or time-consuming 3D modeling. Meanwhile, AI image generators can produce beautiful interior concepts but offer limited control over the underlying spatial layout.
-
-We wanted to bridge that gap.
-
-- **The Problem:** People struggle to visualize furniture arrangements, color combinations, and interior styles before making expensive design decisions.
-
-- **Our Solution:** Me Room combines smartphone-based room scanning, AI-powered scene understanding, interactive 3D visualization, and natural language editing in a single mobile experience.
-
-- **The Impact:** Our goal is to make interior design more accessible to everyone, helping homeowners, renters, and students experiment with their living spaces before committing to real-world changes.
-
-**Our vision is simple: Interior design should start with a conversation, not complicated software.**
-
----
-
-## 🛠️ Tech Stack
-
-| Layer | Technology | Purpose |
-|-------|------------|---------|
-| Mobile Frontend | React Native, Expo, TypeScript | Cross-platform mobile UI, camera scanning, and user interactions |
-| Backend | Python, FastAPI | REST APIs, video processing, and AI orchestration |
-| AI / Vision | OpenAI API | Room understanding, object recognition, and spatial reasoning |
-| AI / Design | OpenAI API | Natural language interpretation and interior design commands |
-| 3D Visualization | Three.js | Interactive 3D room reconstruction and scene manipulation |
-| Video Processing | FFmpeg | Extracting image frames from room-scanning videos |
-| Data Exchange | JSON, Pydantic | Structured room representation and API validation |
-| Database | Not required for MVP | Lightweight, session-based room data management |
-
-### ⚙️ How It Works
-
-Me Room connects computer vision, structured spatial data, and real-time 3D rendering through a unified pipeline.
-
-**1. Capture**
-
-Users scan their room with a smartphone camera, capturing the space from multiple angles.
-
-**2. Analyze**
-
-The mobile application uploads the recording to the FastAPI backend, where FFmpeg extracts representative frames for OpenAI Vision to analyze.
-
-**3. Reconstruct**
-
-AI identifies furniture, room characteristics, and approximate spatial relationships. The backend converts these findings into a structured `RoomScene` JSON representation.
-
-**4. Visualize**
-
-Three.js transforms the structured room data into an interactive 3D scene that users can explore from different perspectives.
-
-**5. Redesign**
-
-Users describe their desired changes in natural language. AI translates these requests into structured scene modifications, allowing the application to update furniture placement, colors, and other supported properties.
-
-### System Architecture
+## Project Structure
 
 ```text
-            ┌─────────────────────┐
-            │   Expo Mobile App   │
-            │   Camera / Chat UI  │
-            └──────────┬──────────┘
-                       │
-                Video Upload
-                       │
-                       ▼
-            ┌─────────────────────┐
-            │   FastAPI Backend   │
-            │   FFmpeg Processing │
-            └──────────┬──────────┘
-                       │
-                Extract Frames
-                       │
-                       ▼
-            ┌─────────────────────┐
-            │     OpenAI API      │
-            │ Vision / Reasoning  │
-            └──────────┬──────────┘
-                       │
-                 Room Analysis
-                       │
-                       ▼
-            ┌─────────────────────┐
-            │   RoomScene JSON    │
-            │  3D Scene Builder   │
-            └──────────┬──────────┘
-                       │
-                       ▼
-            ┌─────────────────────┐
-            │    Three.js 3D      │
-            │  Interactive Room   │
-            └──────────┬──────────┘
-                       │
-                User AI Commands
-                       │
-                       ▼
-            ┌─────────────────────┐
-            │ AI Scene Editing    │
-            │ Update 3D Objects   │
-            └─────────────────────┘
+.
+├── mobile/                         # One Expo / React Native application
+│   ├── AGENTS.md
+│   ├── .codex/                     # Mobile app crewmates
+│   ├── app/                        # Future screens: scan, room, chat
+│   ├── components/
+│   │   └── Room3D/                 # Native 3D component and its crewmates
+│   │       ├── AGENTS.md
+│   │       └── .codex/
+│   └── assets/
+│       └── models/                 # Future bundled GLB models
+├── backend/                        # FastAPI, FFmpeg, OpenAI
+│   ├── AGENTS.md
+│   └── .codex/                     # Backend and AI crewmates
+├── shared/
+│   ├── AGENTS.md
+│   ├── README.md                   # Draft contract conventions
+│   └── example.json                # Synthetic RoomScene example
+└── AGENTS.md                       # Repository contributor guide
 ```
 
-> **Technical note:** The hackathon prototype focuses on approximate, AI-assisted room reconstruction rather than precise, measurement-grade 3D scanning. Our long-term vision includes more accurate spatial reconstruction and immersive room exploration.
+The previous `frontend/` team now lives in `mobile/`.
+The previous `viewer/` team now lives in `mobile/components/Room3D/` and owns the native renderer.
+The old empty `room-sence.example.json` placeholder has been replaced by `shared/example.json`.
 
----
+## Architecture
 
-## 🚀 Getting Started
-
-### Prerequisites
-
-- Node.js and npm
-- Python 3.10+
-- FFmpeg
-- Expo Go or an iOS/Android development environment
-- An OpenAI API key
-
-### 1. Clone the Repository
-
-```bash
-git clone <YOUR_REPOSITORY_URL>
-cd <YOUR_REPOSITORY_NAME>
+```mermaid
+flowchart TD
+    A[Expo camera and chat] -->|Video or design prompt| B[FastAPI backend]
+    B --> C[FFmpeg frames and OpenAI analysis]
+    C --> D[Validated RoomScene JSON]
+    D --> E[Expo React state]
+    E -->|sceneData prop| F[Room3D: R3F Native and expo-gl]
+    G[Bundled GLB models] --> F
 ```
 
-### 2. Start the Backend
+The mobile app owns the current RoomScene and supplies it to the renderer:
 
-```bash
-cd backend
-
-python -m venv .venv
-source .venv/bin/activate
-
-pip install -r requirements.txt
+```tsx
+<Room3D sceneData={roomScene} />
 ```
 
-Create a `.env` file:
+The native 3D component updates when `sceneData` changes.
+Rendering happens inside the Expo app; there is no separate viewer server, viewer URL, or WebView messaging bridge in the selected design.
+Room reconstruction remains approximate; scene estimates, model quality, textures, and lighting determine how closely the result resembles the real room.
 
-```env
-OPENAI_API_KEY=your_openai_api_key
+## Team Responsibilities
+
+| Owner | Scope | Deliverable |
+| --- | --- | --- |
+| Khải, mobile app | `mobile/app/` and app-level API/state integration | Capture, upload, loading, room screen, and AI chat |
+| Tú, backend and AI | `backend/` | Video analysis and validated scene/design responses |
+| Quang, native 3D | `mobile/components/Room3D/` and `mobile/assets/models/` | Reusable native `Room3D` component, GLB placement, lighting, and touch controls |
+| All three leads | `shared/` and mobile dependency configuration | One consistent scene contract and compatible runtime |
+
+Khải and Quang work in the same Expo project with separate file ownership.
+Agree ownership before editing `mobile/package.json`, the lockfile, Metro configuration, or app configuration once those files exist.
+
+## Planned Stack and API
+
+| Area | Technology |
+| --- | --- |
+| Mobile | Expo, React Native, TypeScript |
+| Native 3D | `@react-three/fiber/native`, Three.js, `expo-gl`, `expo-asset` |
+| Backend | Python, FastAPI, Pydantic |
+| AI and video | OpenAI API and FFmpeg |
+| Shared data | RoomScene JSON |
+
+| Endpoint | Planned purpose |
+| --- | --- |
+| `POST /scan` | Accept video and return a RoomScene |
+| `POST /design` | Apply a design prompt and return the updated RoomScene |
+| `GET /health` | Report backend health |
+
+Agree multipart field names, error responses, and whether `/design` receives the scene or a server-managed `sceneId` before implementing clients.
+See [shared/README.md](shared/README.md) for the draft scene shape and coordinate conventions.
+
+## Development Status and Next Steps
+
+There are no working application build or start commands yet.
+Initialize the Expo app inside `mobile/`, preserving its existing agent guides and the native 3D team's files.
+Create the FastAPI application and its dependency manifest inside `backend/`.
+Do not create a second Expo project inside `Room3D/`.
+
+When the Expo project exists, install Expo-compatible native dependencies and choose an R3F version matching its React version.
+The [official R3F Native installation guide](https://r3f.docs.pmnd.rs/getting-started/installation#react-native) describes the native import, Expo dependencies, and Metro asset handling.
+Keep Metro defaults when adding GLB support, and verify access to the shared JSON from the selected Expo configuration.
+
+Before committing to the native renderer for the demo, test on the actual iPhone:
+
+1. Render a box and move the camera using touch.
+2. Render multiple objects from the shared example, then change the data to show a second layout.
+3. Load a textured GLB and verify its dimensions, orientation, and placement.
+
+Only reconsider the rendering architecture after reporting concrete device failures to the team.
+Simulator or desktop checks alone do not prove native iPhone rendering works.
+
+## Starting the Coding Crewmates
+
+Run one of these commands from the repository root:
+
+```sh
+codex -C backend "Use the backend crewmates to implement and verify <task>."
+codex -C mobile "Use the mobile crewmates to implement and verify <task>."
+codex -C mobile/components/Room3D "Use the native 3D crewmates to implement and verify <task>."
 ```
 
-Start the FastAPI server:
+Each main session is its team's lead and delegates to coder, tester, reviewer, and confirmer roles.
+Read the corresponding `.codex/TEAM.md` for ownership, messaging, and verification rules.
+These configurations define on-demand teammates; they do not launch persistent workers.
 
-```bash
-uvicorn main:app --reload --host 0.0.0.0 --port 8000
-```
+## Demo and Roadmap
 
-### 3. Start the 3D Viewer
+The target demo is iPhone capture, AI scene analysis, native 3D exploration, and chat-driven room updates.
+Demo video and app installation instructions will be added after implementation and verification.
+Future ideas include more accurate scanning, richer furniture models, voice commands, and room sharing.
 
-Open another terminal:
+## Security
 
-```bash
-cd viewer
-npm install
-npm run dev
-```
-
-### 4. Start the Mobile Application
-
-Open another terminal:
-
-```bash
-cd mobile
-npm install
-npx expo start
-```
-
-Scan the Expo QR code using your phone, or launch the application in a supported simulator.
-
-> Update the mobile application's API configuration to point to your backend server's reachable IP address or HTTPS URL.
-
----
-
-## 👥 Team
-
-Built by a team of three developers passionate about AI, mobile development, and interactive 3D experiences.
-
-| GitHub | Role | Responsibilities |
-|--------|------|------------------|
-| [@mudotet](https://github.com/mudotet) | Backend & AI Engineer | FastAPI, OpenAI integration, room analysis, spatial data processing, and API development |
-| [@mesut1203](https://github.com/mesut1203) | Mobile Frontend Developer | React Native, Expo, camera scanning, user interface, and AI chat experience |
-| [@ChiTran-1012](https://github.com/ChiTran-1012) | 3D Developer | Three.js, 3D room reconstruction, scene rendering, and interactive object manipulation |
-
----
-
-## 🔮 Future Roadmap
-
-Me Room is just the beginning. Our long-term vision includes:
-
-- **High-Accuracy 3D Scanning:** Integrate LiDAR and advanced spatial reconstruction for more accurate room models.
-- **Photorealistic AI Rendering:** Generate realistic visual previews of redesigned interiors.
-- **Voice-Controlled Design:** Allow users to redesign their rooms through natural voice conversations.
-- **Smart Furniture Placement:** Suggest furniture arrangements based on room dimensions, usability, and space optimization.
-- **Shoppable Interior Design:** Connect furniture recommendations to real products on platforms such as Amazon and Shopee.
-- **Room Design Sharing:** Save, compare, and share personalized interior designs.
-
----
-
-## ❤️ Built at AI IN YOUR PALM 2026
-
-Me Room was created as a hackathon project exploring how multimodal AI and interactive 3D technology can make interior design more intuitive and accessible.
-
-**Your room. Your imagination. Your AI designer.**
+Keep OpenAI credentials on the backend and never bundle them in the mobile app.
+Use synthetic scenes for shared fixtures and keep private room recordings out of source control and logs.
+Obtain explicit user authorization before pushing or deploying.

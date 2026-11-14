@@ -1,0 +1,22 @@
+[features]
+multi_agent_v2 = true
+
+[agents]
+enabled = true
+max_concurrent_threads_per_session = 4
+
+[agents.coder]
+description = "Implement mobile screens, capture, API calls, React state, and native Room3D integration."
+config_file = "agents/coder.toml"
+
+[agents.tester]
+description = "Verify mobile flows, network failure states, and Room3D prop integration."
+config_file = "agents/tester.toml"
+
+[agents.reviewer]
+description = "Independently review app correctness, privacy, accessibility, and native component contracts."
+config_file = "agents/reviewer.toml"
+
+[agents.confirmer]
+description = "Confirm mobile acceptance criteria against actual changes and evidence."
+config_file = "agents/confirmer.toml"

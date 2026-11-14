@@ -1,0 +1,22 @@
+[features]
+multi_agent_v2 = true
+
+[agents]
+enabled = true
+max_concurrent_threads_per_session = 4
+
+[agents.coder]
+description = "Implement R3F Native Room3D, model placement, lighting, and touch controls."
+config_file = "agents/coder.toml"
+
+[agents.tester]
+description = "Verify native rendering, prop updates, GLB loading, and iPhone controls."
+config_file = "agents/tester.toml"
+
+[agents.reviewer]
+description = "Independently review scene contracts, native compatibility, transforms, and GPU resource lifecycle."
+config_file = "agents/reviewer.toml"
+
+[agents.confirmer]
+description = "Confirm native 3D acceptance criteria against rendered and device evidence."
+config_file = "agents/confirmer.toml"

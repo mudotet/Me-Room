@@ -1,0 +1,51 @@
+{
+  "sceneId": "demo-bedroom-001",
+  "room": {
+    "width": 4,
+    "length": 5,
+    "height": 2.8,
+    "wallColor": "#E8DED2"
+  },
+  "objects": [
+    {
+      "id": "bed-1",
+      "type": "bed",
+      "modelId": "bed-modern-01",
+      "position": { "x": -0.95, "y": 0.28, "z": -0.7 },
+      "size": { "x": 1.6, "y": 0.56, "z": 2 },
+      "rotationY": 0,
+      "color": "#D9C9B8",
+      "confidence": 0.86
+    },
+    {
+      "id": "desk-1",
+      "type": "desk",
+      "modelId": "desk-modern-01",
+      "position": { "x": 0.9, "y": 0.375, "z": -1.7 },
+      "size": { "x": 1.2, "y": 0.75, "z": 0.6 },
+      "rotationY": 0,
+      "color": "#A67C52",
+      "confidence": 0.8
+    },
+    {
+      "id": "wardrobe-1",
+      "type": "wardrobe",
+      "modelId": "wardrobe-modern-01",
+      "position": { "x": 1.6, "y": 1, "z": 1.1 },
+      "size": { "x": 0.6, "y": 2, "z": 1.4 },
+      "rotationY": 0,
+      "color": "#C8B69E",
+      "confidence": 0.82
+    },
+    {
+      "id": "chair-1",
+      "type": "chair",
+      "modelId": "chair-modern-01",
+      "position": { "x": 0.9, "y": 0.45, "z": -0.9 },
+      "size": { "x": 0.5, "y": 0.9, "z": 0.5 },
+      "rotationY": 0,
+      "color": "#69786A",
+      "confidence": 0.78
+    }
+  ]
+}
