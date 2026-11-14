@@ -2,9 +2,9 @@ import { useEffect, type RefObject } from 'react';
 import { BackSide } from 'three';
 import { CameraControls } from './CameraControls';
 import { Furniture } from './Furniture';
-import type { CameraGesture, Room3DProps } from './types';
+import type { CameraGesture, MovementInput, Room3DProps } from './types';
 
-export function RoomSceneContents(props: Room3DProps & { gesture: RefObject<CameraGesture> }) {
+export function RoomSceneContents(props: Room3DProps & { gesture: RefObject<CameraGesture>; liveMovement?: RefObject<MovementInput> }) {
   const { sceneData, viewMode = 'third', onReady } = props;
   const { width, length, height, wallColor } = sceneData.room;
   useEffect(() => { onReady?.(); }, [sceneData, onReady]);

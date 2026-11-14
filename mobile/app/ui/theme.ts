@@ -1,6 +1,7 @@
 export const colors = {
   ink: '#211936',
   muted: '#80758F',
+  olive: '#7356E8',
   purple: '#7356E8',
   purpleDeep: '#5640C4',
   lavender: '#F0EDFF',
@@ -13,8 +14,8 @@ export const colors = {
 export type ApiStatus = 'checking' | 'online' | 'offline' | 'unconfigured';
 
 export const statusLabel: Record<ApiStatus, string> = {
-  checking: 'Đang kết nối trợ lý',
-  online: 'Trợ lý AI đang online',
-  offline: 'Trợ lý đang mất kết nối',
-  unconfigured: 'Khám phá cùng Roomie',
+  checking: 'Đang kiểm tra kết nối',
+  online: 'Dịch vụ đã kết nối',
+  offline: 'Không thể kết nối dịch vụ',
+  unconfigured: 'Chưa cấu hình dịch vụ',
 };

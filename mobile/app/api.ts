@@ -1,4 +1,6 @@
 import Constants from 'expo-constants';
+import { File } from 'expo-file-system';
+import { Platform } from 'react-native';
 import { parseRoomScene, SceneValidationError } from './scene';
 import type { Capture, RoomScene, SceneResult } from './types';
 
@@ -10,6 +12,8 @@ export class ApiError extends Error {
   }
 }
 
+const apiConfigHelp = 'Trên iPhone, đặt EXPO_PUBLIC_API_BASE_URL trong mobile/.env thành http://<IP-Wi-Fi-của-Mac>:8001. Không dùng localhost hay cổng Expo 8081/8082. Khởi động lại Expo rồi tải lại app.';
+
 export function getApiBaseUrl(): string | undefined {
   const configured: unknown = process.env.EXPO_PUBLIC_API_BASE_URL || Constants.expoConfig?.extra?.apiBaseUrl;
   if (typeof configured !== 'string' || configured.trim() === '') return undefined;
@@ -18,7 +22,7 @@ export function getApiBaseUrl(): string | undefined {
     if (!['https:', 'http:'].includes(url.protocol) || url.username || url.password || url.search || url.hash) throw new Error();
     return url.toString().replace(/\/+$/, '');
   } catch {
-    throw new ApiError('Địa chỉ máy chủ chưa hợp lệ. Hãy kiểm tra cấu hình API rồi khởi động lại ứng dụng.', 'CONFIG');
+    throw new ApiError(`Địa chỉ backend chưa hợp lệ. ${apiConfigHelp}`, 'CONFIG');
   }
 }
 
@@ -48,7 +52,7 @@ async function request(
 ): Promise<unknown> {
   if (signal?.aborted) throw abortError();
   const baseUrl = getApiBaseUrl();
-  if (!baseUrl) throw new ApiError('Chưa kết nối máy chủ. Hãy cấu hình địa chỉ API rồi thử lại.', 'CONFIG');
+  if (!baseUrl) throw new ApiError(`Chưa cấu hình địa chỉ backend. ${apiConfigHelp}`, 'CONFIG');
   const controller = new AbortController();
   let timedOut = false;
   const cancel = () => controller.abort();
@@ -105,27 +109,30 @@ export async function scanRoom(capture: Capture, signal?: AbortSignal): Promise<
     if (!capture.uri || !/^video\/(mp4|quicktime|webm)$/i.test(capture.mimeType)) {
       throw new ApiError('Video chưa hợp lệ. Hãy quay lại hoặc chọn video MP4, MOV hay WebM.', 'CAPTURE');
     }
-    const maxBytes = 50 * 1024 * 1024;
-    if (capture.fileSize !== undefined && (!Number.isFinite(capture.fileSize) || capture.fileSize <= 0 || capture.fileSize > maxBytes)) {
-      throw new ApiError('Video cần có kích thước nhỏ hơn 50 MB và không được trống.', 'CAPTURE');
+    const maxBytes = 250 * 1024 * 1024;
+    if (capture.fileSize !== undefined) {
+      if (!Number.isFinite(capture.fileSize) || capture.fileSize < 0) {
+        throw new ApiError('Không thể xác định kích thước video hợp lệ.', 'CAPTURE');
+      }
+      if (capture.fileSize === 0) throw new ApiError('Video không được để trống.', 'CAPTURE');
+      if (capture.fileSize > maxBytes) throw new ApiError('Video vượt quá giới hạn 250 MiB.', 'CAPTURE');
     }
     const form = new FormData();
     const name = capture.fileName.replace(/[^a-zA-Z0-9._-]/g, '_').slice(-100) || 'room.mp4';
-    if (capture.webFile || typeof document !== 'undefined') {
+    if (Platform.OS === 'web' || capture.webFile) {
       const blob = capture.webFile ?? await fetch(capture.uri, { signal: requestSignal }).then((response) => {
         if (!response.ok) throw new ApiError('Không thể đọc video đã chọn. Hãy thử video khác.', 'CAPTURE');
         return response.blob();
       });
-      if (!blob || blob.size === 0 || blob.size > maxBytes) {
-        throw new ApiError('Video cần có kích thước nhỏ hơn 50 MB và không được trống.', 'CAPTURE');
-      }
+      if (!blob || !Number.isFinite(blob.size) || blob.size < 0) throw new ApiError('Không thể xác định kích thước video hợp lệ.', 'CAPTURE');
+      if (blob.size === 0) throw new ApiError('Video không được để trống.', 'CAPTURE');
+      if (blob.size > maxBytes) throw new ApiError('Video vượt quá giới hạn 250 MiB.', 'CAPTURE');
       form.append('video', blob, name);
     } else {
-      // React Native FormData resolves local file URIs; the browser branch uses a real Blob.
-      form.append('video', { uri: capture.uri, name, type: capture.mimeType } as unknown as Blob);
+      form.append('video', new File(capture.uri));
     }
     return { method: 'POST', headers: { Accept: 'application/json' }, body: form };
-  }, signal, 120_000);
+  }, signal, 180_000);
   return sceneResult(result);
 }
 

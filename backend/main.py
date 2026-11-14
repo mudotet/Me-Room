@@ -7,6 +7,7 @@ from typing import Annotated
 
 from fastapi import FastAPI, File, HTTPException, Request, UploadFile
 from fastapi.exceptions import RequestValidationError
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
 from ai import SceneAI
@@ -69,6 +70,17 @@ def create_app(settings: Settings | None = None, ai_service=None) -> FastAPI:
     app = FastAPI(title="Me Room Backend", version="0.1.0", lifespan=lifespan)
 
     app.add_middleware(BodySizeLimit)
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=[
+            "http://localhost:8081",
+            "http://127.0.0.1:8081",
+            "http://localhost:8082",
+            "http://127.0.0.1:8082",
+        ],
+        allow_methods=["GET", "POST", "OPTIONS"],
+        allow_headers=["Content-Type"],
+    )
 
     @app.exception_handler(RequestValidationError)
     async def invalid_request(_request, exc):

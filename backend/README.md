@@ -24,6 +24,7 @@ Optional `OPENAI_SCAN_MODEL` and `OPENAI_DESIGN_MODEL` default to `gpt-6.1-sol` 
 Keep `.env` private; it is ignored by Git.
 
 Interactive API docs are at `http://127.0.0.1:8000/docs`.
+Browser requests from Expo web at `http://localhost:8081`, `http://127.0.0.1:8081`, `http://localhost:8082`, and `http://127.0.0.1:8082` are allowed with GET, POST, and Content-Type preflights.
 For an iPhone on a trusted LAN, bind to `0.0.0.0` and use the computer's LAN IP in the app.
 This demo has no authentication and must not be exposed publicly with a paid API key.
 
@@ -87,8 +88,8 @@ Room dimensions are limited to 100 meters wide/long and 20 meters high, with at 
 Object positions are bounding-box centers, Y is vertical, units are meters, and `rotationY` is radians.
 Geometry validation does not prove that furniture avoids overlapping or that measurements match reality.
 
-Uploads are limited to 50 MiB of video and 120 seconds of duration.
-The full multipart request is additionally capped at 50 MiB plus 64 KiB before it is fully parsed, including requests without Content-Length.
+Uploads are limited to 250 MiB of video and 120 seconds of duration.
+The full multipart request is additionally capped at 250 MiB plus 64 KiB before it is fully parsed, including requests without Content-Length.
 Design request bodies are capped at 256 KiB.
 Video streams exceeding 7680 pixels on either dimension are rejected.
 FFprobe and each FFmpeg extraction have 30-second timeouts and are killed on timeout/cancellation.

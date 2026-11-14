@@ -55,7 +55,7 @@ export default function App() {
 
   const landscape = screen === 'room' && viewMode === 'first';
   // iOS resizable windows may ignore a successful orientation lock request.
-  const needsLandscapeWindow = Platform.OS !== 'web' && landscape && width <= height;
+  const needsLandscapeWindow = landscape && width <= height;
   useEffect(() => {
     let active = true;
     if (Platform.OS === 'web') return;
@@ -136,7 +136,7 @@ export default function App() {
   return <SafeAreaProvider>
     <StatusBar style={screen === 'home' || screen === 'profile' ? 'dark' : 'light'} hidden={landscape} />
     <View style={styles.background}>
-      <View style={[styles.app, desktop && { width: landscape ? Math.min(width - 32, 1120) : 450, height: landscape ? webLandscapeHeight : Math.min(height - 32, 900), flex: undefined, borderRadius: 34 }, Platform.OS === 'web' && landscape && !desktop && { width: height, height: width, flex: undefined, transform: [{ rotate: '90deg' }] }]}>
+      <View style={[styles.app, desktop && { width: landscape ? Math.min(width - 32, 1120) : 450, height: landscape ? webLandscapeHeight : Math.min(height - 32, 900), flex: undefined, borderRadius: 34 }]}>
         {screen === 'home' && <HomeScreen onScan={onScan} onOpenRoom={openDemo} onProfile={() => setScreen('profile')} apiStatus={apiStatus} />}
         {screen === 'profile' && <ProfileScreen onHome={goHome} onScan={onScan} apiStatus={apiStatus} />}
         {screen === 'scan' && <ScanScreen onClose={goHome} onCapture={runScan} />}

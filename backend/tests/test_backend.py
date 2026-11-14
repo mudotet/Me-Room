@@ -40,6 +40,56 @@ def test_health_without_key():
     assert response.json()["openai_configured"] is False
 
 
+@pytest.mark.parametrize(
+    ("origin", "method", "path"),
+    [
+        ("http://localhost:8081", "GET", "/health"),
+        ("http://localhost:8081", "POST", "/design"),
+        ("http://127.0.0.1:8081", "GET", "/health"),
+        ("http://127.0.0.1:8081", "POST", "/design"),
+        ("http://localhost:8082", "GET", "/health"),
+        ("http://localhost:8082", "POST", "/design"),
+        ("http://127.0.0.1:8082", "GET", "/health"),
+        ("http://127.0.0.1:8082", "POST", "/design"),
+    ],
+)
+def test_local_web_preflight(origin, method, path):
+    with TestClient(create_app(Settings(api_key=""))) as client:
+        response = client.options(
+            path,
+            headers={
+                "Origin": origin,
+                "Access-Control-Request-Method": method,
+                "Access-Control-Request-Headers": "content-type",
+            },
+        )
+
+    assert response.status_code == 200
+    assert response.headers["access-control-allow-origin"] == origin
+    assert set(response.headers["access-control-allow-methods"].split(", ")) == {
+        "GET",
+        "POST",
+        "OPTIONS",
+    }
+    assert "content-type" in response.headers["access-control-allow-headers"].lower()
+    assert "access-control-allow-credentials" not in response.headers
+
+
+def test_local_web_preflight_rejects_other_origins():
+    with TestClient(create_app(Settings(api_key=""))) as client:
+        response = client.options(
+            "/design",
+            headers={
+                "Origin": "https://example.com",
+                "Access-Control-Request-Method": "POST",
+                "Access-Control-Request-Headers": "content-type",
+            },
+        )
+
+    assert response.status_code == 400
+    assert "access-control-allow-origin" not in response.headers
+
+
 def test_scan_rejects_invalid_video(scene):
     with TestClient(create_app(Settings(api_key="test"), FakeAI(scene))) as client:
         response = client.post(
@@ -56,6 +106,20 @@ def test_scan_size_limit(scene):
         response = client.post(
             "/scan", files={"video": ("x.mp4", b"x" * 11, "video/mp4")}
         )
+    assert response.status_code == 413
+
+
+def test_default_upload_limit_is_250_mib_without_allocating_body(scene):
+    limit = 250 * 1024 * 1024
+    assert Settings().max_upload_bytes == limit
+
+    with TestClient(create_app(Settings(api_key="test"), FakeAI(scene))) as client:
+        response = client.post(
+            "/scan",
+            content=b"",
+            headers={"Content-Length": str(limit + 65536 + 1)},
+        )
+
     assert response.status_code == 413
 
 

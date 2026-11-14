@@ -5,12 +5,16 @@ export interface Room3DProps {
   sceneData: RoomScene;
   style?: StyleProp<ViewStyle>;
   viewMode?: 'first' | 'third';
-  /** An explicit zoom is controlled by the screen; omit it to enable pinch zoom. */
+  /** Screen zoom is the baseline; pinch zoom adjusts it while orbiting. */
   zoom?: number;
-  movement?: { forward: number; turn: number };
+  movement?: MovementInput;
+  showJoystick?: boolean;
+  controlsEnabled?: boolean;
   onReady?: () => void;
   onError?: (message: string) => void;
 }
+
+export type MovementInput = { forward: number; turn: number; strafe?: number };
 
 export interface CameraGesture {
   yaw: number;

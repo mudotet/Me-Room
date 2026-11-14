@@ -1,87 +1,65 @@
 # Me Room
 
-Ứng dụng Expo bằng TypeScript, chuyển thiết kế trong `main.zip` và năm ảnh tham chiếu sang mobile. Header dùng **Me Room**. Trợ lý giữ tên **Roomie**.
+Expo mobile app for room capture, 3D previews, and AI-assisted design, backed by FastAPI.
 
-## Chạy dự án
+## Run on macOS
 
-Yêu cầu Node.js 22.13+ (đã kiểm tra bằng Node 24.12), npm và thiết bị/Expo Go tương thích SDK 58. Windows dùng `npm.cmd` và `npx.cmd` nếu PowerShell chặn `npm.ps1`.
+Requirements: Node.js 22.13+, npm, and Expo Go compatible with SDK 58.
 
-```powershell
-npm.cmd ci
-npm.cmd start
+Start the backend from the repository root:
+
+```sh
+cd backend
+.venv/bin/uvicorn main:app --host 0.0.0.0 --port 8001
 ```
 
-Mở QR bằng Expo Go tương thích hoặc dùng development build. iOS development build cần macOS/Xcode hoặc quy trình build riêng; chưa tạo IPA trong tác vụ này.
+Start Expo from another terminal:
 
-Xem bản web:
-
-```powershell
-npm.cmd run web
+```sh
+cd mobile
+npm ci
+npm start -- --lan --port 8082
 ```
 
-Native dùng camera thật; bản web cho chọn video có sẵn. Trình duyệt cần WebGL để xem phòng 3D.
-Để gọi API từ web, backend phải cho phép origin của trang (khi chạy mặc định: `http://localhost:8081`) qua CORS. Native không dùng cơ chế CORS của trình duyệt.
+Connect the iPhone and Mac to the same Wi-Fi, then open Expo Go from the QR code.
 
-## Cấu hình API
+## iPhone API setup
 
-Tạo `.env` trong `mobile/` dựa trên `.env.example`:
+Set both entries in `mobile/.env` to the Mac's current Wi-Fi address:
 
 ```dotenv
-API_BASE_URL=http://192.168.1.100:8000
+EXPO_PUBLIC_API_BASE_URL=http://192.168.1.84:8001
+API_BASE_URL=http://192.168.1.84:8001
 ```
 
-Dùng địa chỉ backend thật. Khi chạy trên điện thoại, `localhost` là điện thoại, không phải máy tính. Hai thiết bị cần truy cập được cùng backend. Khởi động lại Expo sau khi đổi `.env`. Bản build phát hành nên dùng HTTPS; cấu hình HTTP nội bộ cần được kiểm tra trên thiết bị đích.
+`EXPO_PUBLIC_API_BASE_URL` is inlined by Metro; `API_BASE_URL` is the app-config fallback.
+The backend uses port `8001`; Expo Go uses `8082`.
+On iPhone, `localhost` points to the phone, so use the Mac's LAN IP.
+After changing `.env`, restart Expo and reload the app.
+Check backend access on iPhone at `http://192.168.1.84:8001/health`.
 
-Chỉ địa chỉ API được đưa vào `extra.apiBaseUrl`; `.env` được Git bỏ qua. Không đặt khóa OpenAI trong ứng dụng hoặc biến `EXPO_PUBLIC_*`.
+Native video uploads use `File` from `expo-file-system` inside `FormData`, as required by Expo 58's default fetch implementation.
+The older React Native `{ uri, name, type }` upload object fails with `Unsupported FormDataPart implementation` before reaching the backend.
+See the [Expo file upload documentation](https://docs.expo.dev/versions/v58.0.0/sdk/filesystem/#uploading-files-using-expofetch).
 
-Hợp đồng đã đối chiếu với OpenAPI của backend được cấu hình ngày 14/11/2026:
+For production, use HTTPS and keep OpenAI credentials on the backend.
 
-| Endpoint | Dữ liệu | Kết quả |
-| --- | --- | --- |
-| `GET /health` | Không có | JSON `status: ok` hoặc `healthy` |
-| `POST /scan` | Multipart `video` (MP4/MOV/WebM) | `RoomScene` |
-| `POST /design` | JSON `{scene, prompt}` | `RoomScene` |
+## App notes
 
-Client cũng chấp nhận `{scene, message?}`. Video native quay 5–15 giây, 720p, không thu âm. Video được chọn từ thư viện có thể chứa âm thanh; giao diện thông báo trước khi gửi. Giới hạn client là 50 MB. Upload chỉ diễn ra sau khi người dùng quay/chọn video. Thời hạn quét 120 giây, thiết kế 60 giây; có hủy và thử lại, không tự thay bằng dữ liệu mẫu khi lỗi.
+The scanner records up to 120 seconds at 720p without audio; selected videos may include audio.
+Both capture paths accept files up to 250 MiB, with a three-minute upload and analysis timeout.
+An iOS 0.5× ultra-wide lens is available only when the device reports that lens.
+Third-person view is portrait; first-person view requests landscape on native and shows a rotate/resize notice on portrait web.
+The left joystick moves relative to the camera direction; dragging the room changes the viewing direction.
+Movement stops when touches end, controls are cancelled, chat opens, or the app leaves the foreground.
+Movement stays inside room boundaries; furniture collision is not modeled.
+No GLB models are bundled yet, so furniture uses box fallbacks.
 
-## Các màn hình
+See the [root README screenshots](../README.md); they are web captures at an iPhone 13 viewport, not physical-device evidence.
 
-- **Trang chủ:** logo Me Room, thẻ Roomie màu tím, hai phòng mẫu có nhãn rõ ràng, thông báo và điều hướng.
-- **Quét phòng:** xin quyền camera, quay/dừng, đèn flash, đổi camera, chọn video; khôi phục quyền khi quay lại từ Settings.
-- **Đang xử lý:** vòng tải, hủy, lỗi và thử lại; không hiển thị phần trăm giả.
-- **Phòng 3D:** góc 3 dọc, kéo để xoay và nút zoom; góc 1 khóa ngang trên native, kéo để nhìn và giữ mũi tên để di chuyển. Thoát sẽ trở lại dọc. Bản web dùng khung ngang, tự xoay khung xem trên màn hình hẹp.
-- **Chat:** gửi yêu cầu thiết kế, nhận scene mới và cập nhật React state. Request bị hủy hoặc cũ không được ghi đè scene hiện tại.
-- **Hồ sơ:** hướng dẫn và trạng thái kết nối, chưa có tài khoản hoặc đồng bộ lịch sử.
+## Checks
 
-## Cấu trúc
-
-`app/App.tsx` quản lý điều hướng/state; `app/screens` chứa giao diện; `app/api.ts` gọi API; `app/scene.ts` kiểm tra dữ liệu; `components/Room3D` sở hữu renderer, ánh sáng và điều khiển camera. Một Expo project, một manifest. Metro đọc fixture chuẩn từ `../shared/example.json`; phòng khách là fixture tổng hợp thứ hai.
-
-`Room3D` nhận `sceneData` bất biến, dùng R3F native và adapter web trong cùng project. Chưa có GLB trong nguồn được cung cấp: nội thất dùng hình khối dự phòng, không tải URL model từ phản hồi API. Xem `components/Room3D/README.md`.
-
-## Kiểm tra
-
-```powershell
-npm.cmd run typecheck
-npm.cmd test
-npx.cmd expo install --check
-npm.cmd run export:web
-npm.cmd run export:ios
-npm.cmd run test:api
+```sh
+npm run typecheck
+npm test
 ```
-
-`export:ios` tạo JavaScript/Hermes bundle, không phải bằng chứng chạy trên iPhone. Export được lưu riêng trong `dist/web` và `dist/ios`.
-
-Smoke đầy đủ chỉ dùng video tổng hợp tại đường dẫn được giới hạn:
-
-```powershell
-npm.cmd run test:api -- --full --video test-results/synthetic-room.mp4
-```
-
-Video tổng hợp đã được tạo tại đường dẫn trên trong workspace này; không được commit. Khi clone mới, có thể dùng FFmpeg để tạo clip 6 giây không có dữ liệu riêng tư rồi đặt đúng tên. Không trỏ script vào bản ghi cá nhân. Nếu không truyền video, script vẫn thử `/design` bằng fixture và báo kết quả một phần. Script không in địa chỉ backend, secrets hoặc nội dung phản hồi.
-
-Kết quả và giới hạn kiểm thử: [docs/verification.md](docs/verification.md).
-
-Phiên bản đã nâng cấp và xác nhận: Expo 58.0.25, React 19.3.0, React Native 0.88.1, R3F 9.8.2, TypeScript 6.0.3. Chạy `npm.cmd start -- --clear` lần đầu sau nâng cấp để xóa cache Metro cũ. Development build cũ cần được build lại cho SDK 58.
-
-Trên iOS 27, cửa sổ có thể thay đổi kích thước và hệ điều hành có thể không thực hiện yêu cầu khóa ngang. App vẫn yêu cầu góc 1 ngang, đồng thời kiểm tra kích thước cửa sổ thật và hướng dẫn xoay/mở rộng cửa sổ khi cần. Tham chiếu: [Expo SDK 58](https://expo.dev/changelog/sdk-58), [R3F native](https://r3f.docs.pmnd.rs/getting-started/installation), [Expo Camera](https://docs.expo.dev/versions/v58.0.0/sdk/camera/), [khóa hướng màn hình](https://docs.expo.dev/versions/v58.0.0/sdk/screen-orientation/).
