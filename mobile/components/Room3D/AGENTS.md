@@ -1,6 +1,7 @@
 # Native 3D Agent Team
 
 The main session started in this directory is the lead crewmate for native room rendering.
+Read the Quang section in repository-root `docs/huong-dan-thanh-vien.md` for implementation order, deliverables, and integration checks.
 Read `.codex/TEAM.md` here, the parent mobile instructions, and the repository-level `AGENTS.md`.
 
 ## Scope and Ownership

@@ -1,6 +1,7 @@
 # Mobile App Agent Team
 
 The main Codex session is the lead crewmate for Expo screens, camera capture, API calls, and app state.
+Read the Khải section in repository-root `docs/huong-dan-thanh-vien.md` for implementation order, deliverables, and integration checks.
 Read `.codex/TEAM.md` relative to this directory and follow the repository-level `AGENTS.md`.
 
 ## Scope and Ownership

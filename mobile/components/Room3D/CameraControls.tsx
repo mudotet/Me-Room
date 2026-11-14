@@ -5,7 +5,7 @@ import type { CameraGesture, Room3DProps } from './types';
 
 type Props = Room3DProps & { gesture: RefObject<CameraGesture> };
 
-export function CameraControls({ sceneData, viewMode = 'third', zoom = 1, movement, gesture }: Props) {
+export function CameraControls({ sceneData, viewMode = 'third', zoom, movement, gesture }: Props) {
   const { camera } = useThree();
   const walker = useRef({ x: 0, z: 0, yaw: 0 });
   const target = useRef(new Vector3());
@@ -16,6 +16,7 @@ export function CameraControls({ sceneData, viewMode = 'third', zoom = 1, moveme
     walker.current = { x: 0, z: length * 0.33, yaw: 0 };
     gesture.current.yaw = 0;
     gesture.current.pitch = 0;
+    gesture.current.zoom = 1;
     if (camera instanceof PerspectiveCamera) {
       camera.fov = viewMode === 'first' ? 68 : 42;
       camera.near = 0.03;
@@ -39,7 +40,7 @@ export function CameraControls({ sceneData, viewMode = 'third', zoom = 1, moveme
       camera.lookAt(look.current);
       return;
     }
-    const radius = Math.max(width, length) * 1.7 / MathUtils.clamp(zoom, 0.7, 2);
+    const radius = Math.max(width, length) * 1.7 / MathUtils.clamp(zoom ?? gesture.current.zoom, 0.7, 2);
     const yaw = Math.PI / 5 + gesture.current.yaw;
     const elevation = MathUtils.clamp(0.85 + gesture.current.pitch, 0.35, 1.35);
     target.current.set(

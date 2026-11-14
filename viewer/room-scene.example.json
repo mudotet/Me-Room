@@ -1,0 +1,10 @@
+{
+  "name": "Phòng khách ấm cúng",
+  "room": { "width": 5.2, "depth": 4.4, "height": 2.8 },
+  "objects": [
+    { "id": "sofa-1", "modelId": "sofa", "position": { "x": 0, "y": 0.42, "z": -1.42 }, "size": { "width": 2.25, "height": 0.84, "depth": 0.88 }, "rotationY": 0 },
+    { "id": "table-1", "modelId": "table", "position": { "x": 0.1, "y": 0.23, "z": 0.02 }, "size": { "width": 1.05, "height": 0.46, "depth": 0.66 }, "rotationY": -0.1 },
+    { "id": "chair-1", "modelId": "chair", "position": { "x": -1.72, "y": 0.4, "z": 0.25 }, "size": { "width": 0.76, "height": 0.8, "depth": 0.78 }, "rotationY": -0.35 },
+    { "id": "plant-1", "modelId": "plant", "position": { "x": 2.05, "y": 0.65, "z": -1.45 }, "size": { "width": 0.48, "height": 1.3, "depth": 0.48 }, "rotationY": 0 }
+  ]
+}

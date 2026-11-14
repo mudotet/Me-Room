@@ -6,8 +6,9 @@ Built for AI IN YOUR PALM Hackathon 2026.
 
 Me Room aims to turn a room-scanning video into an approximate 3D room and let users redesign it through chat.
 The selected architecture is a single Expo mobile application with native 3D rendering and a FastAPI backend for AI processing.
-This checkout currently contains the project structure, contributor guides, Codex team configurations, and a synthetic JSON example.
-The application, APIs, GLB assets, dependency manifests, and tests still need implementation.
+The backend now implements `/health`, `/scan`, and stateless `/design`, with validation, frame extraction, OpenAI integration, and automated tests.
+See [backend/README.md](backend/README.md) for installation, commands, API examples, and limitations.
+The mobile application and GLB assets still need implementation.
 
 ## Project Structure
 
@@ -61,6 +62,8 @@ Room reconstruction remains approximate; scene estimates, model quality, texture
 
 ## Team Responsibilities
 
+Xem [hướng dẫn chi tiết cho Khải, Tú và Quang](docs/huong-dan-thanh-vien.md) để biết thứ tự triển khai, bàn giao, kiểm thử và cách dùng đội agent của từng người.
+
 | Owner | Scope | Deliverable |
 | --- | --- | --- |
 | Khải, mobile app | `mobile/app/` and app-level API/state integration | Capture, upload, loading, room screen, and AI chat |
@@ -87,14 +90,17 @@ Agree ownership before editing `mobile/package.json`, the lockfile, Metro config
 | `POST /design` | Apply a design prompt and return the updated RoomScene |
 | `GET /health` | Report backend health |
 
-Agree multipart field names, error responses, and whether `/design` receives the scene or a server-managed `sceneId` before implementing clients.
+`POST /scan` accepts a multipart field named `video`.
+`POST /design` accepts `{ "scene": <complete RoomScene>, "prompt": "..." }` and returns a complete updated scene; the backend does not store sessions.
+See [backend/README.md](backend/README.md) for limits and error responses.
 See [shared/README.md](shared/README.md) for the draft scene shape and coordinate conventions.
 
 ## Development Status and Next Steps
 
-There are no working application build or start commands yet.
+The backend can run using the commands in [backend/README.md](backend/README.md).
+There is no runnable mobile application yet.
 Initialize the Expo app inside `mobile/`, preserving its existing agent guides and the native 3D team's files.
-Create the FastAPI application and its dependency manifest inside `backend/`.
+The FastAPI implementation and dependency manifests are in `backend/`.
 Do not create a second Expo project inside `Room3D/`.
 
 When the Expo project exists, install Expo-compatible native dependencies and choose an R3F version matching its React version.

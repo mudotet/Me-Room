@@ -10,3 +10,4 @@ web-build/
 test-results/
 coverage/
 
+*.tsbuildinfo

@@ -12,8 +12,8 @@ function WebGLUnavailable({ onError }: Pick<Room3DProps, 'onError'>) {
 }
 
 export default function Room3D(props: Room3DProps) {
-  const { gesture, panHandlers } = useCameraGesture();
-  return <View style={styles.canvas} {...panHandlers} accessibilityLabel="Mô hình căn phòng 3D. Kéo để thay đổi góc nhìn.">
+  const { gesture, panHandlers } = useCameraGesture(props.zoom === undefined);
+  return <View style={[styles.canvas, props.style]} {...panHandlers} accessibilityLabel="Mô hình căn phòng 3D. Kéo để thay đổi góc nhìn.">
     <RenderBoundary key={props.sceneData.sceneId} onError={props.onError}>
       <Canvas shadows dpr={[1, 1.5]} camera={{ position: [7, 8, 9], fov: 42 }} gl={{ antialias: true }} fallback={<WebGLUnavailable onError={props.onError} />}>
         <RoomSceneContents {...props} gesture={gesture} />
@@ -22,4 +22,4 @@ export default function Room3D(props: Room3DProps) {
   </View>;
 }
 
-const styles = StyleSheet.create({ canvas: { flex: 1, backgroundColor: '#DCD3E3' } });
+const styles = StyleSheet.create({ canvas: { flex: 1, overflow: 'hidden', backgroundColor: '#DCD3E3' } });
