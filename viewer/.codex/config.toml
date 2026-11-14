@@ -1,0 +1,22 @@
+[features]
+multi_agent_v2 = true
+
+[agents]
+enabled = true
+max_concurrent_threads_per_session = 4
+
+[agents.coder]
+description = "Implement Three.js room loading, GLB placement, controls, and mobile messaging."
+config_file = "agents/coder.toml"
+
+[agents.tester]
+description = "Verify room layouts, model fallbacks, scene updates, and viewer controls."
+config_file = "agents/tester.toml"
+
+[agents.reviewer]
+description = "Independently review scene contracts, rendering, resource cleanup, and messaging."
+config_file = "agents/reviewer.toml"
+
+[agents.confirmer]
+description = "Confirm viewer acceptance criteria against changes and rendering evidence."
+config_file = "agents/confirmer.toml"

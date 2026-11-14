@@ -1,0 +1,22 @@
+[features]
+multi_agent_v2 = true
+
+[agents]
+enabled = true
+max_concurrent_threads_per_session = 4
+
+[agents.coder]
+description = "Implement assigned backend and AI functionality."
+config_file = "agents/coder.toml"
+
+[agents.tester]
+description = "Reproduce failures and verify backend and AI behavior."
+config_file = "agents/tester.toml"
+
+[agents.reviewer]
+description = "Independently review correctness, security, and contracts."
+config_file = "agents/reviewer.toml"
+
+[agents.confirmer]
+description = "Independently confirm acceptance criteria and verification evidence."
+config_file = "agents/confirmer.toml"

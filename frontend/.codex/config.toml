@@ -1,0 +1,22 @@
+[features]
+multi_agent_v2 = true
+
+[agents]
+enabled = true
+max_concurrent_threads_per_session = 4
+
+[agents.coder]
+description = "Implement Expo mobile screens, capture, API calls, and the WebView bridge."
+config_file = "agents/coder.toml"
+
+[agents.tester]
+description = "Verify mobile flows, API integration, and viewer messaging."
+config_file = "agents/tester.toml"
+
+[agents.reviewer]
+description = "Independently review mobile correctness, privacy, accessibility, and contracts."
+config_file = "agents/reviewer.toml"
+
+[agents.confirmer]
+description = "Confirm mobile acceptance criteria against changes and verification evidence."
+config_file = "agents/confirmer.toml"
