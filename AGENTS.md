@@ -8,7 +8,7 @@ Me Room is an AI-assisted room design prototype using one Expo app and a FastAPI
 `mobile/assets/models/` holds the future GLB catalog.
 `backend/` owns video processing and AI orchestration.
 `shared/example.json` is a synthetic draft RoomScene fixture, with its conventions in `shared/README.md`.
-Application code, dependency manifests, and tests have not been implemented yet.
+Backend application code, dependency manifests, and tests are in `backend/`; mobile implementation is still pending.
 
 ## Architecture & Ownership
 
@@ -20,7 +20,7 @@ Use the nearest `AGENTS.md` and `.codex/TEAM.md` for team scope and instructions
 
 ## Build, Test, and Development Commands
 
-There is no runnable app, configured formatter, test framework, or coverage target yet.
+Backend setup and pytest commands are documented in `backend/README.md`; mobile tooling and coverage targets are not configured yet.
 Use `git status --short` to inspect changes and `python3 -m json.tool shared/example.json` to check the example's JSON syntax.
 When adding implementation, document actual install, run, build, and test commands in the owning module.
 Choose compatible Expo, React, and R3F versions before installing dependencies.

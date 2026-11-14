@@ -31,9 +31,10 @@ If those roles are not available, the lead can still delegate with the role inst
 
 ## Backend and AI boundaries
 
-The intended backend uses Python, FastAPI, FFmpeg, and OpenAI, but no application or tests exist yet.
+The backend uses Python, FastAPI, FFmpeg, and OpenAI; read backend/README.md for actual setup and test commands.
 Inspect the current implementation before relying on these plans as facts.
-Use repository-root `shared/example.json` and `shared/README.md` as the draft scene reference; formal validation and API details still need agreement across all three leads.
+Use repository-root `shared/example.json` and `shared/README.md` for the MVP scene contract, implemented by backend/schemas.py.
+Scan accepts multipart field video; design accepts the complete scene and prompt, without server-side sessions.
 The mobile app stores returned scenes in React state and passes them to `Room3D` in `mobile/components/Room3D/`.
 Coordinate contract changes with the mobile and native 3D leads, assigning one writer in `shared/` and updating consumers together.
 Protect API keys and private room videos, validate uploads and external AI responses, and account for timeouts and failures at service boundaries.
