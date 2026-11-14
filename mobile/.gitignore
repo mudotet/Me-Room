@@ -1,0 +1,12 @@
+node_modules/
+.node_modules-incomplete/
+.expo/
+dist/
+web-build/
+.env
+.env.*
+!.env.example
+*.log
+test-results/
+coverage/
+
