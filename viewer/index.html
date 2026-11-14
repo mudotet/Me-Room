@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#f5f4f0" />
+    <title>Me Room — Thiết kế không gian</title>
+  </head>
+  <body>
+    <div id="app">
+      <header class="topbar">
+        <a class="brand" href="#" aria-label="Me Room trang chủ"><span class="brand-mark">m</span><span>me room</span></a>
+        <div class="top-actions"><span class="saved"><i></i> Đã lưu</span><button class="avatar" aria-label="Tài khoản">A</button></div>
+      </header>
+      <main>
+        <section class="heading">
+          <div><div class="eyebrow"><span class="eyebrow-line"></span> KHÔNG GIAN CỦA BẠN</div><h1 id="room-title">Phòng khách ấm cúng</h1><p id="room-subtitle">Khám phá căn phòng từ mọi góc nhìn.</p></div>
+          <label class="upload-button" for="json-file"><span class="upload-icon">↑</span><span class="upload-label">Nhập file JSON</span><input id="json-file" type="file" accept=".json,application/json" /></label>
+        </section>
+        <section class="viewer-card" aria-label="Mô hình 3D căn phòng">
+          <div class="canvas-wrap" id="viewer"></div>
+          <div class="canvas-top"><span class="live-pill"><i></i> XEM 3D</span><button id="reset-view" class="icon-button" aria-label="Đặt lại góc nhìn" title="Đặt lại góc nhìn">⟲</button></div>
+          <div class="canvas-bottom"><span class="hint"><span class="hint-mouse">⌖</span> Kéo để xoay <b>·</b> Cuộn để thu phóng</span><span class="dimensions" id="room-dimensions">5.2 × 4.4 m</span></div>
+          <div id="toast" class="toast" role="status" aria-live="polite"></div>
+        </section>
+        <section class="details">
+          <div class="details-heading"><div><span class="section-label">TỔNG QUAN</span><h2>Chi tiết không gian</h2></div><span class="item-count"><strong id="item-count">4</strong> món đồ</span></div>
+          <div class="detail-grid">
+            <article class="info-card room-card"><div class="card-icon room-icon">⌂</div><div class="card-copy"><span class="card-label">KÍCH THƯỚC PHÒNG</span><strong id="room-size">5.2 × 4.4 m</strong><span class="card-note">Diện tích <b id="room-area">22.9 m²</b></span></div><span class="card-arrow">↗</span></article>
+            <article class="info-card furniture-card"><div class="furniture-top"><div class="card-icon furniture-icon">✳</div><div><span class="card-label">NỘI THẤT</span><strong><span id="furniture-count">4</span> món đồ</strong></div><span class="card-arrow">↗</span></div><div id="furniture-list" class="furniture-list"></div></article>
+          </div>
+        </section>
+        <footer><span class="footer-mark">m</span><span>Không gian đẹp bắt đầu từ bạn.</span><span class="footer-right">ME ROOM <span>© 2025</span></span></footer>
+      </main>
+    </div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

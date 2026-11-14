@@ -1,0 +1,18 @@
+{
+  "expo": {
+    "name": "Me Room",
+    "slug": "me-room",
+    "version": "1.0.0",
+    "orientation": "landscape",
+    "userInterfaceStyle": "light",
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "edgeToEdgeEnabled": true
+    },
+    "plugins": [
+      "expo-asset"
+    ]
+  }
+}

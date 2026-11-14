@@ -1,0 +1,28 @@
+{
+  "name": "me-room-mobile",
+  "version": "1.0.0",
+  "private": true,
+  "main": "index.ts",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@react-three/fiber": "^9.8.2",
+    "expo": "~58.0.25",
+    "expo-asset": "~58.0.21",
+    "expo-gl": "~58.0.4",
+    "expo-status-bar": "~58.0.4",
+    "react": "19.3.0",
+    "react-native": "0.88.1",
+    "three": "^0.183.2"
+  },
+  "devDependencies": {
+    "@types/react": "~19.3.0",
+    "@types/three": "^0.183.1",
+    "typescript": "~6.0.3"
+  }
+}
