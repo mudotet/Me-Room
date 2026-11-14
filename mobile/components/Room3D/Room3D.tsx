@@ -1,4 +1,4 @@
-import React, { useMemo, useRef, useState } from 'react';
+import React, { useMemo, useRef } from 'react';
 import { PanResponder, StyleSheet, View, type StyleProp, type ViewStyle } from 'react-native';
 import { Canvas, useFrame } from '@react-three/fiber/native';
 import * as THREE from 'three';
@@ -22,6 +22,10 @@ export type RoomScene = {
 type Props = { sceneData: RoomScene; style?: StyleProp<ViewStyle> };
 const MIN_ZOOM = 3;
 const MAX_ZOOM = 16;
+const INITIAL_CAMERA = { yaw: 0.72, pitch: 0.28, zoom: 8 };
+
+type CameraPose = { yaw: number; pitch: number; zoom: number };
+type GestureStart = CameraPose & { distance: number };
 
 function validDimension(value: number) {
   return Number.isFinite(value) && value > 0 ? value : 0.1;
@@ -46,13 +50,18 @@ function Furniture({ item }: { item: RoomObject }) {
   );
 }
 
-function CameraRig({ yaw, pitch, zoom }: { yaw: number; pitch: number; zoom: number }) {
-  useFrame(({ camera }) => {
-    const radius = zoom;
+function CameraRig({ target }: { target: { current: CameraPose } }) {
+  const pose = useRef<CameraPose>(INITIAL_CAMERA);
+  useFrame(({ camera }, delta) => {
+    // Damp on the render loop so gesture events never trigger a React/scene render.
+    pose.current.yaw = THREE.MathUtils.damp(pose.current.yaw, target.current.yaw, 18, delta);
+    pose.current.pitch = THREE.MathUtils.damp(pose.current.pitch, target.current.pitch, 18, delta);
+    pose.current.zoom = THREE.MathUtils.damp(pose.current.zoom, target.current.zoom, 16, delta);
+    const radius = pose.current.zoom;
     camera.position.set(
-      Math.sin(yaw) * radius,
-      Math.max(0.7, Math.sin(pitch) * radius + 1.2),
-      Math.cos(yaw) * radius,
+      Math.sin(pose.current.yaw) * radius,
+      Math.max(0.7, Math.sin(pose.current.pitch) * radius + 1.2),
+      Math.cos(pose.current.yaw) * radius,
     );
     camera.lookAt(0, 0.6, 0);
   });
@@ -90,8 +99,8 @@ function Room({ sceneData }: { sceneData: RoomScene }) {
 
 /** Native, data-driven room preview. Drag to orbit and pinch to zoom. */
 export default function Room3D({ sceneData, style }: Props) {
-  const [camera, setCamera] = useState({ yaw: 0.72, pitch: 0.28, zoom: 8 });
-  const gestureStart = useRef({ yaw: 0.72, pitch: 0.28, zoom: 8, distance: 0 });
+  const cameraTarget = useRef<CameraPose>({ ...INITIAL_CAMERA });
+  const gestureStart = useRef<GestureStart>({ ...INITIAL_CAMERA, distance: 0 });
   const panResponder = useMemo(() => PanResponder.create({
     onStartShouldSetPanResponder: () => true,
     onMoveShouldSetPanResponder: () => true,
@@ -100,7 +109,7 @@ export default function Room3D({ sceneData, style }: Props) {
       const distance = touches.length > 1
         ? Math.hypot(touches[0].pageX - touches[1].pageX, touches[0].pageY - touches[1].pageY)
         : 0;
-      gestureStart.current = { ...camera, distance };
+      gestureStart.current = { ...cameraTarget.current, distance };
     },
     onPanResponderMove: (event, gesture) => {
       const touches = event.nativeEvent.touches || [];
@@ -111,21 +120,18 @@ export default function Room3D({ sceneData, style }: Props) {
           gestureStart.current = { ...start, distance };
           return;
         }
-        setCamera((current) => ({ ...current, zoom: THREE.MathUtils.clamp(start.zoom * start.distance / Math.max(distance, 1), MIN_ZOOM, MAX_ZOOM) }));
+        cameraTarget.current.zoom = THREE.MathUtils.clamp(start.zoom * start.distance / Math.max(distance, 1), MIN_ZOOM, MAX_ZOOM);
         return;
       }
-      setCamera((current) => ({
-        ...current,
-        yaw: gestureStart.current.yaw - gesture.dx * 0.006,
-        pitch: THREE.MathUtils.clamp(gestureStart.current.pitch + gesture.dy * 0.004, -0.35, 0.9),
-      }));
+      cameraTarget.current.yaw = gestureStart.current.yaw - gesture.dx * 0.006;
+      cameraTarget.current.pitch = THREE.MathUtils.clamp(gestureStart.current.pitch + gesture.dy * 0.004, -0.35, 0.9);
     },
-  }), [camera]);
+  }), []);
 
   return (
     <View style={[styles.container, style]} {...panResponder.panHandlers}>
-      <Canvas shadows camera={{ position: [5, 4, 6], fov: 42 }}>
-        <CameraRig {...camera} />
+      <Canvas shadows camera={{ position: [Math.sin(INITIAL_CAMERA.yaw) * INITIAL_CAMERA.zoom, Math.sin(INITIAL_CAMERA.pitch) * INITIAL_CAMERA.zoom + 1.2, Math.cos(INITIAL_CAMERA.yaw) * INITIAL_CAMERA.zoom], fov: 42 }}>
+        <CameraRig target={cameraTarget} />
         <Room sceneData={sceneData} />
       </Canvas>
     </View>
