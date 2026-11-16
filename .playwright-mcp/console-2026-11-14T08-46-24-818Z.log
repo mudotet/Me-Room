@@ -1,0 +1,33 @@
+[     268ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:8082/index.ts.bundle?platform=web&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.routerRoot=app&unstable_transformProfile=hermes-stable:1695
+[  114006ms] [WARNING] THREE.THREE.Clock: This module has been deprecated. Please use THREE.Timer instead. @ http://localhost:8082/index.ts.bundle?platform=web&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.routerRoot=app&unstable_transformProfile=hermes-stable:1695
+[  114052ms] [WARNING] THREE.WebGLShadowMap: PCFSoftShadowMap has been deprecated. Using PCFShadowMap instead. @ http://localhost:8082/index.ts.bundle?platform=web&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.routerRoot=app&unstable_transformProfile=hermes-stable:1695
+[  143737ms] Unable to resolve module ./useCameraGesture from /Users/tus/Document/hackathon_codex_hanoi_14_11/meRôm/mobile/components/Room3D/Room3D.web.tsx: 
+
+None of these files exist:
+  * components/Room3D/useCameraGesture(.web.ts|.ts|.web.tsx|.tsx|.web.mjs|.mjs|.web.js|.js|.web.jsx|.jsx|.web.json|.json|.web.cjs|.cjs|.web.scss|.scss|.web.sass|.sass|.web.css|.css)
+  * components/Room3D/useCameraGesture
+  4 | import { RoomSceneContents } from './RoomScene';
+  5 | import { RenderBoundary } from './RenderBoundary';
+> 6 | import { useCameraGesture } from './useCameraGesture';
+    |                                   ^
+  7 | import type { Room3DProps } from './types';
+  8 |
+  9 | function WebGLUnavailable({ onError }: Pick<Room3DProps, 'onError'>) {
+[  146990ms] Unable to resolve module ./useCameraGesture from /Users/tus/Document/hackathon_codex_hanoi_14_11/meRôm/mobile/components/Room3D/Room3D.web.tsx: 
+
+None of these files exist:
+  * components/Room3D/useCameraGesture(.web.ts|.ts|.web.tsx|.tsx|.web.mjs|.mjs|.web.js|.js|.web.jsx|.jsx|.web.json|.json|.web.cjs|.cjs|.web.scss|.scss|.web.sass|.sass|.web.css|.css)
+  * components/Room3D/useCameraGesture
+  4 | import { RoomSceneContents } from './RoomScene';
+  5 | import { RenderBoundary } from './RenderBoundary';
+> 6 | import { useCameraGesture } from './useCameraGesture';
+    |                                   ^
+  7 | import type { Room3DProps } from './types';
+  8 |
+  9 | function WebGLUnavailable({ onError }: Pick<Room3DProps, 'onError'>) {
+[  168284ms] [WARNING] THREE.THREE.Clock: This module has been deprecated. Please use THREE.Timer instead. @ http://localhost:8082/index.ts.bundle?platform=web&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.routerRoot=app&unstable_transformProfile=hermes-stable:1695
+[  168311ms] [WARNING] THREE.WebGLShadowMap: PCFSoftShadowMap has been deprecated. Using PCFShadowMap instead. @ http://localhost:8082/index.ts.bundle?platform=web&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.routerRoot=app&unstable_transformProfile=hermes-stable:1695
+[  199518ms] [WARNING] THREE.THREE.Clock: This module has been deprecated. Please use THREE.Timer instead. @ http://localhost:8082/index.ts.bundle?platform=web&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.routerRoot=app&unstable_transformProfile=hermes-stable:1695
+[  199544ms] [WARNING] THREE.WebGLShadowMap: PCFSoftShadowMap has been deprecated. Using PCFShadowMap instead. @ http://localhost:8082/index.ts.bundle?platform=web&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.routerRoot=app&unstable_transformProfile=hermes-stable:1695
+[  243270ms] [WARNING] THREE.THREE.Clock: This module has been deprecated. Please use THREE.Timer instead. @ http://localhost:8082/index.ts.bundle?platform=web&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.routerRoot=app&unstable_transformProfile=hermes-stable:1695
+[  243294ms] [WARNING] THREE.WebGLShadowMap: PCFSoftShadowMap has been deprecated. Using PCFShadowMap instead. @ http://localhost:8082/index.ts.bundle?platform=web&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.routerRoot=app&unstable_transformProfile=hermes-stable:1695

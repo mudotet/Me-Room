@@ -1,0 +1,40 @@
+- generic [ref=f1e138]:
+  - generic [ref=f1e140]:
+    - generic [ref=f1e141]:
+      - generic [ref=f1e142]:
+        - generic [ref=f1e143]: 
+        - heading "Me Room" [level=1] [ref=f1e145]
+      - button "Mở thông báo" [ref=f1e146] [cursor=pointer]:
+        - generic [ref=f1e147]: 
+    - generic [ref=f1e148]:
+      - generic [ref=f1e149]: TRỢ LÝ AI ĐANG ONLINE
+      - heading "Biến căn phòng thành cảm hứng." [level=1] [ref=f1e152]
+      - generic [ref=f1e153]: Quét không gian của bạn, để Roomie gợi ý phong cách và cách sắp xếp phù hợp.
+    - generic [ref=f1e154]:
+      - generic [ref=f1e157]: ROOMIE AI · ROOM SCANNER
+      - generic [ref=f1e173]:
+        - generic [ref=f1e174]: Xin chào, bạn!
+        - generic [ref=f1e175]: Mình có thể giúp bạn khám phá căn phòng mới hôm nay.
+      - button " Bắt đầu quét phòng" [ref=f1e176] [cursor=pointer]:
+        - generic [ref=f1e177]: 
+        - generic [ref=f1e178]: Bắt đầu quét phòng
+    - generic [ref=f1e179]:
+      - heading "Không gian gần đây" [level=1] [ref=f1e180]
+      - button "Xem tất cả" [ref=f1e181] [cursor=pointer]
+    - generic [ref=f1e183]:
+      - button "Mở phòng khách mẫu trong 3D" [ref=f1e184] [cursor=pointer]:
+        - generic [ref=f1e190]:
+          - generic [ref=f1e191]: Phòng khách
+          - generic [ref=f1e192]: Không gian mẫu · 3D
+      - button "Mở phòng ngủ mẫu trong 3D" [ref=f1e193] [cursor=pointer]:
+        - generic [ref=f1e198]:
+          - generic [ref=f1e199]: Phòng ngủ
+          - generic [ref=f1e200]: Không gian mẫu · 3D
+  - generic [ref=f1e201]:
+    - tab "Trang chủ" [ref=f1e202] [cursor=pointer]:
+      - generic [ref=f1e204]: 
+    - button "Bắt đầu quét phòng" [ref=f1e206] [cursor=pointer]:
+      - generic [ref=f1e207]: 
+      - generic [ref=f1e209]: Quét phòng
+    - tab "Hồ sơ" [ref=f1e210] [cursor=pointer]:
+      - generic [ref=f1e211]: 

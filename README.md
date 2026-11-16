@@ -2,6 +2,19 @@
 
 **Scan your space. Reimagine your room. Bring your ideas to life with AI.**
 
+## Application Screenshots
+
+The screenshots below are captured from the running web application at iPhone 13 viewport dimensions, not from a physical iPhone.
+Sample rooms contain synthetic scene data and are labeled as samples in the app.
+
+| Home | Room capture |
+| --- | --- |
+| ![Me Room home with room samples and scan action](docs/images/home.png) | ![Room capture screen with video selection](docs/images/scan.png) |
+
+| Third-person overview | First-person walkthrough |
+| --- | --- |
+| ![Elevated oblique view of a 3D room](docs/images/room-overview.png) | ![Landscape first-person room view and movement controls](docs/images/room-walkthrough.png) |
+
 Built for AI IN YOUR PALM Hackathon 2026.
 
 Me Room aims to turn a room-scanning video into an approximate 3D room and let users redesign it through chat.
@@ -139,19 +152,6 @@ These configurations define on-demand teammates; they do not launch persistent w
 ## Demo and Roadmap
 
 The target demo is iPhone capture, AI scene analysis, native 3D exploration, and chat-driven room updates.
-The screenshots below are captured from the running web application at iPhone 13 viewport dimensions, not from a physical iPhone.
-Sample rooms contain synthetic scene data and are labeled as samples in the app.
-
-### Application Screenshots
-
-| Home | Room capture |
-| --- | --- |
-| ![Me Room home with room samples and scan action](docs/images/home.png) | ![Room capture screen with video selection](docs/images/scan.png) |
-
-| Third-person overview | First-person walkthrough |
-| --- | --- |
-| ![Elevated oblique view of a 3D room](docs/images/room-overview.png) | ![Landscape first-person room view and movement controls](docs/images/room-walkthrough.png) |
-
 ### Run on iPhone 13 with Expo Go
 
 Connect the Mac and iPhone to the same trusted Wi-Fi network and install Expo Go compatible with SDK 58.

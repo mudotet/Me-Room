@@ -1,0 +1,39 @@
+- generic [ref=f8e101]:
+  - generic [ref=f8e103]:
+    - generic [ref=f8e104]:
+      - generic [ref=f8e105]:
+        - generic [ref=f8e106]: STUDIO THIẾT KẾ KHÔNG GIAN
+        - heading "Me Room" [level=1] [ref=f8e107]
+      - generic [ref=f8e108]: Dịch vụ đã kết nối
+    - generic [ref=f8e109]:
+      - generic [ref=f8e110]: KHÔNG GIAN SỐNG, THEO CÁCH CỦA BẠN
+      - heading "Một căn phòng. Nhiều cách sống." [level=1] [ref=f8e111]
+      - generic [ref=f8e112]: Quét video căn phòng để tạo bản dựng 3D và thử những cách sắp xếp khác nhau.
+    - generic [ref=f8e113]:
+      - generic [ref=f8e114]:
+        - generic [ref=f8e115]: MẶT BẰNG MINH HỌA
+        - generic [ref=f8e116]: "01"
+      - button "Quét căn phòng của tôi " [ref=f8e128] [cursor=pointer]:
+        - generic [ref=f8e129]: Quét căn phòng của tôi
+        - generic [ref=f8e130]: 
+      - generic [ref=f8e131]: Quay hoặc chọn video · tối đa 2 phút
+    - generic [ref=f8e132]:
+      - generic [ref=f8e133]:
+        - generic [ref=f8e134]: BẢN DỰNG 3D
+        - heading "Phòng mẫu" [level=1] [ref=f8e135]
+      - generic [ref=f8e136]: Dữ liệu minh họa
+    - generic [ref=f8e137]:
+      - button "Mở phòng khách mẫu 3D, kích thước 5,2 nhân 5,8 mét" [ref=f8e138] [cursor=pointer]:
+        - generic [ref=f8e147]: PHÒNG KHÁCH · MẪU
+        - generic [ref=f8e148]: 5,2 × 5,8 m
+      - button "Mở phòng ngủ mẫu 3D, kích thước 4 nhân 5 mét" [ref=f8e149] [cursor=pointer]:
+        - generic [ref=f8e155]: PHÒNG NGỦ · MẪU
+        - generic [ref=f8e156]: 4 × 5 m
+  - generic [ref=f8e157]:
+    - tab "Trang chủ" [ref=f8e158] [cursor=pointer]:
+      - generic [ref=f8e159]: 
+    - button "Bắt đầu quét phòng" [ref=f8e161] [cursor=pointer]:
+      - generic [ref=f8e162]: 
+      - generic [ref=f8e163]: Quét phòng
+    - tab "Hồ sơ" [ref=f8e164] [cursor=pointer]:
+      - generic [ref=f8e165]: 

@@ -1,0 +1,21 @@
+- generic [ref=f8e79]:
+  - generic [ref=f8e80]:
+    - button "Đóng camera và hủy video đang quay" [ref=f8e81] [cursor=pointer]:
+      - generic [ref=f8e82]: 
+    - heading "Quét căn phòng" [level=1] [ref=f8e83]
+    - button "Bật đèn flash" [disabled]:
+      - generic [ref=f8e84]: 
+  - generic [ref=f8e85]:
+    - generic [ref=f8e86]: 
+    - heading "Quét không gian của bạn" [level=1] [ref=f8e88]
+    - generic [ref=f8e89]: Chọn video MP4, MOV hoặc WebM. Tối đa 2 phút và 50 MB.
+    - button "Chọn video căn phòng" [ref=f8e90] [cursor=pointer]
+  - generic [ref=f8e92]:
+    - generic [ref=f8e93]: Chọn video để tiếp tục
+    - generic [ref=f8e94]:
+      - button "Chọn video căn phòng từ thư viện" [ref=f8e95] [cursor=pointer]:
+        - generic [ref=f8e96]: 
+      - button "Chọn video để phân tích căn phòng" [ref=f8e97] [cursor=pointer]
+      - button "Đổi camera trước hoặc sau" [disabled]:
+        - generic [ref=f8e99]: 
+    - generic [ref=f8e100]: Video chỉ được gửi sau khi bạn dừng quay hoặc chọn tệp. Quay trong ứng dụng không thu âm; video trong thư viện có thể kèm âm thanh.

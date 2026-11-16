@@ -1,0 +1,21 @@
+- generic [ref=f2e88]:
+  - generic [ref=f2e89]:
+    - button "Đóng camera và hủy video đang quay" [ref=f2e90] [cursor=pointer]:
+      - generic [ref=f2e91]: 
+    - heading "Quét căn phòng" [level=1] [ref=f2e92]
+    - button "Bật đèn flash" [disabled]:
+      - generic [ref=f2e93]: 
+  - generic [ref=f2e94]:
+    - generic [ref=f2e95]: 
+    - heading "Một góc nhìn mới cho căn phòng của bạn" [level=1] [ref=f2e97]
+    - generic [ref=f2e98]: Trên trình duyệt, hãy chọn video căn phòng dài tối đa 2 phút. Mở ứng dụng trên điện thoại để quay trực tiếp.
+    - button "Chọn video căn phòng" [ref=f2e99] [cursor=pointer]
+  - generic [ref=f2e101]:
+    - generic [ref=f2e102]: Chọn video để phân tích không gian
+    - generic [ref=f2e103]:
+      - button "Chọn video căn phòng từ thư viện" [ref=f2e104] [cursor=pointer]:
+        - generic [ref=f2e105]: 
+      - button "Chọn video để phân tích căn phòng" [ref=f2e106] [cursor=pointer]
+      - button "Đổi camera trước hoặc sau" [disabled]:
+        - generic [ref=f2e108]: 
+    - generic [ref=f2e109]: Video bạn quay hoặc chọn sẽ được gửi để AI phân tích. Quay trực tiếp không thu âm; video chọn có thể kèm âm thanh.

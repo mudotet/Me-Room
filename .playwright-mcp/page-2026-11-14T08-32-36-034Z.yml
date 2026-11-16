@@ -1,0 +1,32 @@
+- generic [ref=f1e87]:
+  - generic [ref=f1e88]:
+    - button "Về trang chủ" [ref=f1e89] [cursor=pointer]:
+      - generic [ref=f1e90]: 
+    - generic [ref=f1e91]:
+      - generic [ref=f1e92]: Phòng khách của bạn
+      - generic [ref=f1e93]: Góc nhìn dọc · từ trên xuống
+    - generic [ref=f1e94]:
+      - button "Góc nhìn thứ ba, màn hình dọc" [ref=f1e95] [cursor=pointer]:
+        - generic [ref=f1e96]: Góc 3
+      - button "Góc nhìn thứ nhất, màn hình ngang" [ref=f1e97] [cursor=pointer]:
+        - generic [ref=f1e98]: Góc 1
+  - generic [ref=f1e99]:
+    - generic "Mô hình căn phòng 3D. Kéo để thay đổi góc nhìn." [ref=f1e100]
+    - generic: Không gian mẫu · mô hình 3D
+    - button "Trò chuyện với Roomie" [ref=f1e104] [cursor=pointer]:
+      - generic [ref=f1e105]: 
+      - generic [ref=f1e121]:
+        - generic [ref=f1e122]: Roomie
+        - generic [ref=f1e123]: Hãy hỏi mình về màu sắc hoặc cách sắp xếp nhé.
+    - generic [ref=f1e124]:
+      - generic [ref=f1e125]: ZOOM
+      - generic [ref=f1e126]:
+        - button "Phóng to" [ref=f1e127] [cursor=pointer]:
+          - generic [ref=f1e128]: 
+        - button "Thu nhỏ" [ref=f1e131] [cursor=pointer]:
+          - generic [ref=f1e132]: 
+  - generic [ref=f1e133]:
+    - generic [ref=f1e134]: Kéo để xoay · dùng + / − để zoom
+    - button " Đóng mô hình" [ref=f1e135] [cursor=pointer]:
+      - generic [ref=f1e136]: 
+      - generic [ref=f1e137]: Đóng mô hình

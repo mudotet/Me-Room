@@ -1,0 +1,30 @@
+- generic [ref=f9e78]:
+  - generic [ref=f9e79]:
+    - button "Về trang chủ" [ref=f9e80] [cursor=pointer]:
+      - generic [ref=f9e81]: 
+    - generic [ref=f9e82]:
+      - generic [ref=f9e83]: Phòng khách của bạn
+      - generic [ref=f9e84]: Tổng quan · xem toàn bộ căn phòng
+    - generic [ref=f9e85]:
+      - button "Góc nhìn thứ ba, tổng quan" [active] [ref=f9e86] [cursor=pointer]:
+        - generic [ref=f9e87]: 3D
+      - button "Góc nhìn thứ nhất, màn hình ngang" [ref=f9e88] [cursor=pointer]:
+        - generic [ref=f9e89]: Đi bộ
+  - generic [ref=f9e90]:
+    - generic "Mô hình căn phòng 3D. Kéo để nhìn, dùng joystick bên trái để di chuyển." [ref=f9e91]
+    - button "Trò chuyện với Roomie" [ref=f9e95] [cursor=pointer]:
+      - generic [ref=f9e96]: 
+      - generic [ref=f9e97]: Roomie
+    - generic: Không gian mẫu · mô hình 3D
+    - generic [ref=f9e127]:
+      - generic [ref=f9e128]: ZOOM
+      - generic [ref=f9e129]:
+        - button "Phóng to" [ref=f9e130] [cursor=pointer]:
+          - generic [ref=f9e131]: 
+        - button "Thu nhỏ" [ref=f9e134] [cursor=pointer]:
+          - generic [ref=f9e135]: 
+  - generic [ref=f9e107]:
+    - generic [ref=f9e108]: Kéo để xoay · chụm hai ngón tay hoặc dùng + / − để zoom
+    - button " Đóng mô hình" [ref=f9e109] [cursor=pointer]:
+      - generic [ref=f9e110]: 
+      - generic [ref=f9e111]: Đóng mô hình
