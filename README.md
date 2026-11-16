@@ -9,11 +9,11 @@ Sample rooms contain synthetic scene data and are labeled as samples in the app.
 
 | Home | Room capture |
 | --- | --- |
-| ![Me Room home with room samples and scan action](docs/images/home.png) | ![Room capture screen with video selection](docs/images/scan.png) |
+| <img src="docs/images/home.png" alt="Me Room home with room samples and scan action" width="240" /> | <img src="docs/images/scan.png" alt="Room capture screen with video selection" width="240" /> |
 
 | Third-person overview | First-person walkthrough |
 | --- | --- |
-| ![Elevated oblique view of a 3D room](docs/images/room-overview.png) | ![Landscape first-person room view and movement controls](docs/images/room-walkthrough.png) |
+| <img src="docs/images/room-overview.png" alt="Elevated oblique view of a 3D room" width="240" /> | <img src="docs/images/room-walkthrough.png" alt="Landscape first-person room view and movement controls" width="360" /> |
 
 Built for AI IN YOUR PALM Hackathon 2026.
 
